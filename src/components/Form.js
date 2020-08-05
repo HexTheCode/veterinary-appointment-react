@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
+import uuid from "uuid/dist/v4";
 
-const Form = () => {
+const Form = ({ handleCitas }) => {
   const [cita, updateCita] = useState({
     mascota: "",
     propietario: "",
@@ -8,6 +9,8 @@ const Form = () => {
     hora: "",
     sintomas: "",
   });
+
+  const [error, updateError] = useState(false);
 
   // Funcion que se ejecuta cada vez que se escriba en un input
 
@@ -22,10 +25,50 @@ const Form = () => {
 
   const { mascota, propietario, fecha, hora, sintomas } = cita;
 
+  // Cuando Submit
+
+  const submitCita = (e) => {
+    e.preventDefault(); // evita que se ejecute el codigo por defecto cuando se pulsa el boton submit
+
+    // Validar
+    if (
+      mascota.trim() === "" ||
+      propietario.trim() === "" ||
+      fecha.trim() === "" ||
+      hora.trim() === "" ||
+      sintomas.trim() === ""
+    ) {
+      updateError(true);
+      return;
+    }
+    // Eliminar mensaje de error
+    updateError(false);
+
+    // Asignar ID
+    cita.id = uuid();
+
+    // Crear Cita
+    handleCitas(cita);
+
+    // Reiniciar Form
+    updateCita({
+      mascota: "",
+      propietario: "",
+      fecha: "",
+      hora: "",
+      sintomas: "",
+    });
+  };
+
   return (
     <Fragment>
       <h2>Crear una Cita</h2>
-      <form>
+
+      {error ? (
+        <p className="alerta-error">Todos los campos son obligatorios</p>
+      ) : null}
+
+      <form onSubmit={submitCita}>
         <label>Nombre de la Mascota</label>
         <input
           type="text"

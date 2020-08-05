@@ -1,7 +1,28 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Form from "./components/Form";
+import Cita from "./components/Cita";
 
 function App() {
+  // arreglo de citas
+
+  const [citas, saveCitas] = useState([]);
+
+  // Funcion que maneje las citas
+
+  const handleCitas = (cita) => {
+    saveCitas([...citas, cita]);
+  };
+
+  // Funcion que elimina la cita por id
+
+  const handleEliminar = (id) => {
+    const nuevaCitas = citas.filter((cita) => cita.id !== id);
+    saveCitas(nuevaCitas);
+  };
+
+  // Mensaje condicional
+  const titulo = citas.length === 0 ? "No hay Citas" : "Administrar tus Citas";
+
   return (
     <Fragment>
       <h1>Administrador de Pacientes</h1>
@@ -9,9 +30,14 @@ function App() {
       <div className="container">
         <div className="row">
           <div className="one-half column">
-            <Form />
+            <Form handleCitas={handleCitas} />
           </div>
-          <div className="one-half column">2</div>
+          <div className="one-half column">
+            <h2>{titulo}</h2>
+            {citas.map((cita) => (
+              <Cita cita={cita} key={cita.id} handleEliminar={handleEliminar} />
+            ))}
+          </div>
         </div>
       </div>
     </Fragment>
