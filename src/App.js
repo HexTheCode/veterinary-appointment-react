@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import Form from "./components/Form";
-import Cita from "./components/Cita";
+import Citas from "./components/Citas";
 
 function App() {
   // arreglo de citas
@@ -33,10 +33,11 @@ function App() {
             <Form handleCitas={handleCitas} />
           </div>
           <div className="one-half column">
-            <h2>{titulo}</h2>
-            {citas.map((cita) => (
-              <Cita cita={cita} key={cita.id} handleEliminar={handleEliminar} />
-            ))}
+            <Citas
+              titulo={titulo}
+              citas={citas}
+              handleEliminar={handleEliminar}
+            />
           </div>
         </div>
       </div>
