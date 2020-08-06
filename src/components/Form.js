@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import uuid from "uuid/dist/v4";
+import PropTypes from "prop-types";
 
 const Form = ({ handleCitas }) => {
   const [cita, updateCita] = useState({
@@ -121,6 +122,10 @@ const Form = ({ handleCitas }) => {
       </form>
     </Fragment>
   );
+};
+
+Form.propTypes = {
+  handleCitas: PropTypes.func.isRequired,
 };
 
 export default Form;

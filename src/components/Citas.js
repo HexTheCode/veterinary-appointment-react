@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import Cita from "./Cita";
+import PropTypes from "prop-types";
 
 const Citas = ({ titulo, citas, handleEliminar }) => {
   return (
@@ -10,6 +11,12 @@ const Citas = ({ titulo, citas, handleEliminar }) => {
       ))}
     </Fragment>
   );
+};
+
+Citas.propTypes = {
+  titulo: PropTypes.string.isRequired,
+  citas: PropTypes.array.isRequired,
+  handleEliminar: PropTypes.func.isRequired,
 };
 
 export default Citas;

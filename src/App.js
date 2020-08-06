@@ -1,11 +1,31 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Form from "./components/Form";
 import Citas from "./components/Citas";
 
 function App() {
+  // Citas en Local storage
+
+  let citasIniciales = JSON.parse(localStorage.getItem("citas"));
+
+  if (!citasIniciales) {
+    citasIniciales = [];
+  }
+
   // arreglo de citas
 
-  const [citas, saveCitas] = useState([]);
+  const [citas, saveCitas] = useState(citasIniciales);
+
+  // Use Effect para realizar ciertas operaciones cuando el State cambia
+
+  useEffect(() => {
+    let citasIniciales = JSON.parse(localStorage.getItem("citas"));
+
+    if (citasIniciales) {
+      localStorage.setItem("citas", JSON.stringify(citas));
+    } else {
+      localStorage.setItem("citas", JSON.stringify([]));
+    }
+  }, [citas]);
 
   // Funcion que maneje las citas
 
