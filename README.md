@@ -1,4 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Deployment on Netlify
+You can visit the build version of project at [Veterinary Appointment](https://cita-veterinario.netlify.app/).
 
 ## Available Scripts
 
